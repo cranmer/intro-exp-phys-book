@@ -1,0 +1,487 @@
+---
+interact_link: content/error-propagation/investigating-propagation-of-errors.ipynb
+kernel_name: python3
+kernel_path: content/error-propagation
+has_widgets: false
+title: |-
+  Investigating-propagation-of-errors
+pagenum: 2
+prev_page:
+  url: /error-propagation/introduction.html
+next_page:
+  url: /error-propagation/Prop-error-plots.html
+suffix: .ipynb
+search: x y q propagation errors sigmax sigmay sigmaq partial formula addition lets its distribution really equation left frac right special case division formulas check under investigating notebook made investigate imagine function want propagate uncertainty denoted respectively through quantity straight forward just randomly sample evaluate definition mean uncertianty very easy simply python code calculus approximation general begin end pm multiplication rewrite sqrt try compare direct approach making prediction single variable example warm consider same interactive widget
+
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+
+    <main class="jupyter-page">
+    <div id="page-info"><div id="page-title">Investigating-propagation-of-errors</div>
+</div>
+    
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Investigating-propagation-of-errors">Investigating propagation of errors<a class="anchor-link" href="#Investigating-propagation-of-errors"> </a></h2><p>This notebook was made to investigate the propagation of errors formula.
+We imagine that we have a function $q(x,y)$ and we want to propagate the
+uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) through to the quantity $q$.</p>
+<p>The most straight forward way to do this is just randomly sample $x$ and $y$, evaluate $q$ and look at it's distribution. This is really the definition of what we mean by propagation of uncertianty. It's very easy to do with some simply python code.</p>
+<p>The calculus formula for the propagation of errors is really an approximation. This is the formula for a general $q(x,y)$
+\begin{equation}
+\sigma_q^2 = \left( \frac{\partial q}{\partial x} \sigma_x \right)^2 + \left( \frac{\partial q}{\partial y}\sigma_y \right)^2
+\end{equation}</p>
+<p>In the special case of addition  $q(x,y) = x\pm y$ we have $\sigma_q^2 = \sigma_x^2 + \sigma_y^2$.</p>
+<p>In the special case of multiplication $q(x,y) = x y$ and division $q(x,y) = x / y$ we have $(\sigma_q/q)^2 = (\sigma_x/x)^2 + (\sigma_y/y)^2$, which we can rewrite as $\sigma_q = (x/y) \sqrt{(\sigma_x/x)^2 + (\sigma_y/y)^2}$</p>
+<p>Let's try out these formulas and compare the direct approach of making the distribution to the prediction from these formulas</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline --no-import-all
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Populating the interactive namespace from numpy and matplotlib
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="k">import</span> <span class="n">widgets</span>  
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="k">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">fixed</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mean_x</span> <span class="o">=</span> <span class="o">.</span><span class="mi">8</span>
+<span class="n">std_x</span> <span class="o">=</span> <span class="o">.</span><span class="mi">15</span>
+<span class="n">mean_y</span> <span class="o">=</span> <span class="mf">3.</span>
+<span class="n">std_y</span> <span class="o">=</span> <span class="o">.</span><span class="mi">9</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_y</span><span class="p">,</span> <span class="n">std_y</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Single-variable-example:-division">Single variable example: division<a class="anchor-link" href="#Single-variable-example:-division"> </a></h2><p>As a warm up, let's consider $q(x) = 1/x$</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">gaus_x</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">normpdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">mean_x</span><span class="p">,</span><span class="n">std_x</span><span class="p">)</span>
+
+<span class="n">q_for_plot</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">bins</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">gaus_x</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">q_for_plot</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Text(0.5,0,&#39;x&#39;)</pre>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/error-propagation/investigating-propagation-of-errors_5_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q_of_x</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">x</span>
+
+<span class="n">pred_mean_q</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">mean_x</span>
+<span class="n">pred_std_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">std_x</span><span class="o">/</span><span class="n">mean_x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">mean_x</span>
+
+<span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">q_of_x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">mlab</span><span class="o">.</span><span class="n">normpdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">pred_mean_q</span><span class="p">,</span> <span class="n">pred_std_q</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;pred&#39;</span><span class="p">,</span><span class="s1">&#39;hist&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;p(x)&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Text(0,0.5,&#39;p(x)&#39;)</pre>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/error-propagation/investigating-propagation-of-errors_6_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Now-let's-do-the-same-thing-with-an-interactive-widget!">Now let's do the same thing with an interactive widget!<a class="anchor-link" href="#Now-let's-do-the-same-thing-with-an-interactive-widget!"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_1_over_x</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+    <span class="n">q_of_x</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">x</span>
+
+    <span class="n">pred_mean_q</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">mean_x</span>
+    <span class="n">pred_std_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">std_x</span><span class="o">/</span><span class="n">mean_x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">mean_x</span>
+
+    <span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">q_of_x</span><span class="p">,</span> 
+                                     <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">pred_mean_q</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="n">pred_mean_q</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span> 
+                                     <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">mlab</span><span class="o">.</span><span class="n">normpdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">pred_mean_q</span><span class="p">,</span> <span class="n">pred_std_q</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;pred&#39;</span><span class="p">,</span><span class="s1">&#39;hist&#39;</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;p(x)&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># now make the interactive widget</span>
+<span class="n">interact</span><span class="p">(</span><span class="n">plot_1_over_x</span><span class="p">,</span><span class="n">mean_x</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">std_x</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">N</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10000</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/error-propagation/investigating-propagation-of-errors_9_0.png"
+>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;function __main__.plot_1_over_x&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Check-propagation-of-errors-under-addition">Check propagation of errors under addition<a class="anchor-link" href="#Check-propagation-of-errors-under-addition"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_x_plus_y</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">mean_y</span><span class="p">,</span> <span class="n">std_y</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_y</span><span class="p">,</span> <span class="n">std_y</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+    <span class="n">q_of_x_y</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
+
+    <span class="n">pred_mean_q</span> <span class="o">=</span> <span class="n">mean_x</span><span class="o">+</span><span class="n">mean_y</span>
+    <span class="n">pred_std_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">std_x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">std_y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">q_of_x_y</span><span class="p">,</span> 
+                                     <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">pred_mean_q</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="n">pred_mean_q</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span> 
+                                     <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">mlab</span><span class="o">.</span><span class="n">normpdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">pred_mean_q</span><span class="p">,</span> <span class="n">pred_std_q</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;pred&#39;</span><span class="p">,</span><span class="s1">&#39;hist&#39;</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;p(x)&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># now make the interactive widget</span>
+<span class="n">interact</span><span class="p">(</span><span class="n">plot_x_plus_y</span><span class="p">,</span>
+         <span class="n">mean_x</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">std_x</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span> 
+         <span class="n">mean_y</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">std_y</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span>
+         <span class="n">N</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10000</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/error-propagation/investigating-propagation-of-errors_11_0.png"
+>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;function __main__.plot_x_plus_y&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Check-propagation-of-errors-under-addition">Check propagation of errors under addition<a class="anchor-link" href="#Check-propagation-of-errors-under-addition"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_x_plus_y</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">mean_y</span><span class="p">,</span> <span class="n">std_y</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_y</span><span class="p">,</span> <span class="n">std_y</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+    <span class="n">q_of_x_y</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">y</span>
+
+    <span class="n">pred_mean_q</span> <span class="o">=</span> <span class="n">mean_x</span><span class="o">/</span><span class="n">mean_y</span>
+    <span class="n">pred_std_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">std_x</span><span class="o">/</span><span class="n">mean_x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">std_y</span><span class="o">/</span><span class="n">mean_y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">mean_x</span><span class="o">/</span><span class="n">mean_y</span>
+
+    <span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">q_of_x_y</span><span class="p">,</span> 
+                                     <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">pred_mean_q</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="n">pred_mean_q</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span> 
+                                     <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">mlab</span><span class="o">.</span><span class="n">normpdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">pred_mean_q</span><span class="p">,</span> <span class="n">pred_std_q</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;pred&#39;</span><span class="p">,</span><span class="s1">&#39;hist&#39;</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;p(x)&#39;</span><span class="p">)</span>
+
+
+
+<span class="n">interact</span><span class="p">(</span><span class="n">plot_x_plus_y</span><span class="p">,</span><span class="n">mean_x</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">std_x</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">mean_y</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">std_y</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span><span class="n">N</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100000</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/error-propagation/investigating-propagation-of-errors_13_0.png"
+>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;function __main__.plot_x_plus_y&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+ 
+
+
+    </main>
+    

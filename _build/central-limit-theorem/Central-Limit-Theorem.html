@@ -1,0 +1,1123 @@
+---
+redirect_from:
+  - "/central-limit-theorem/central-limit-theorem"
+interact_link: content/central-limit-theorem/Central-Limit-Theorem.ipynb
+kernel_name: python3
+kernel_path: content/central-limit-theorem
+has_widgets: false
+title: |-
+  Central-limit-theorem
+pagenum: 8
+prev_page:
+  url: /distributions/accept-reject.html
+next_page:
+  url: /python/programming-in-python.html
+suffix: .ipynb
+search: distribution distributions central limit theorem n q lets xi mean equation github python function chi sum weight cranmer master same pdf above py new notebook probability want x might different files classes example plot part branch square org centrallimittheorem normal gaussian random below instance objects because says e given begin mu end variance standard deviation sigma here intro exp phys ii ipynb just errors formula add project called create used accept reject algorithm basedistribution using nsamples dist where name heres ok helper randomly either version git execute quantity push en wikipedia wiki key result theory helps explain why omnipresent setup
+
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+
+    <main class="jupyter-page">
+    <div id="page-info"><div id="page-title">Central-limit-theorem</div>
+</div>
+    
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Central-Limit-Theorem">Central Limit Theorem<a class="anchor-link" href="#Central-Limit-Theorem"> </a></h2><p>The <a href="https://en.wikipedia.org/wiki/Central_limit_theorem">central limit theorem</a> is a key result in probability theory that helps explain why normal, or Gaussian, distributions are so omnipresent. The setup is that you have distributions for $N$ random variables $x_i$ and you want to know the distribution of $q = \sum_{i=1}^{N} x_i$. Think of each $x_i$ as coming from it's own distribution like in the figure below. For instance, $x_1$ might be the weight of spoons, $x_2$ the weight of forks, $x_3$ the weight of bowls, ..., and $x_N$ of plates in your kitchen. Then $q$ would represent the total weight when you have one of each of those objects. The distribution of weights for each object might be weird because you have some mix-and-match set of silverware from your parents, grandparents, IKEA, and the thrift shop. The <em>central limit theorem</em> says that if you have enough objects (i.e. $N$ is large), then $q$ has a normal (Gaussian) distribution.</p>
+<p><img src="Central_limit_theorem.png" alt=""></p>
+<p>Moreover, the central limit theorem states that the mean value of $q$ is given by</p>
+\begin{equation}
+\mu_{q} = \sum_{i=1}^{N} \mu_{x_i} 
+\end{equation}<p>and the variance (standard deviation squared) is given by</p>
+\begin{equation}
+\sigma_{q}^{2} = \sum_{i=1}^{N} \sigma^2_{x_i} 
+\end{equation}<p><em>if you are having problems with the math displaing, click <a href="http://nbviewer.jupyter.org/github/cranmer/intro-exp-phys-II/blob/master/Central-Limit-Theorem.ipynb?flush_cache=true">here</a></em></p>
+<p>The mean probably isn't surprising because $q$ is just a sum and the integral the defines the mean just distributes across each term. Also, the equation for the variance is the same as the propagation of errors formula we use when we add different measurements together. However, that propoagation of errors formula is derived from the Central Limit Theorem, not vice versa.</p>
+<h3 id="This-is-a-collaborative-project">This is a collaborative project<a class="anchor-link" href="#This-is-a-collaborative-project"> </a></h3><p>In this repository there is a folder called <code>distributions</code> with several python files. The idea is that each student will create one of these python files and we will use GitHub to collect them. Each of these files has a python class that describes a probability distribution.  Each of these classes will define:</p>
+<ul>
+<li><code>x_min, x_max, f_max</code> - used for the accept/reject Monte Carlo sampling algorithm</li>
+<li><code>pdf()</code> - the probability density function</li>
+<li><code>mean()</code> - the mean of the pdf</li>
+<li><code>std()</code> - the standard deviation of the pdf</li>
+</ul>
+<p>In addition, each of these python classes inherits from <code>BaseDistribution</code> which knows how to run the accept/reject algorithm using the information above (<a href="distributions/base_distribution.py">see inside</a> ). In order to generate <code>n_samples</code> from the pdf, you simply call <code>dist.rvs(n_samples)</code>, where <code>dist</code> is an instance of one of these python classes.</p>
+<p><strong>Naming Convention</strong>: Name your file <code>Dist_&lt;netid&gt;.py</code> and your distribution the same way (without the <code>.py</code>). If you want to contribute more than one distribution, you can can add <code>Dist_&lt;netid&gt;_&lt;index&gt;.py</code>, where <code>&lt;index&gt;</code> is 1,2,3,...</p>
+<p>Here's an example:</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>cat distributions/Dist_kc90.py
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>import numpy as np
+from .base_distribution import BaseDistribution
+
+class Dist_kc90(BaseDistribution):
+	def __init__(self):
+		self.f_max = 1
+		self.x_min = -1
+		self.x_max = 1
+
+
+	def pdf(self, x):
+		&#34;&#34;&#34;This is your PDF&#34;&#34;&#34;
+		return np.abs(x)
+
+	def mean(self):
+		&#34;&#34;&#34;This is the mean of the PDF&#34;&#34;&#34;
+		return 0.
+
+	def std(self):
+		&#34;&#34;&#34;This is the standard deviation of the pdf&#34;&#34;&#34;
+		return np.sqrt(0.5)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Example-usage-of-the-distributions">Example usage of the distributions<a class="anchor-link" href="#Example-usage-of-the-distributions"> </a></h2><p>Ok, now let's use them. So far there are only two distributions, but there will be more soon.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline --no-import-all
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">norm</span> <span class="c1">#will use this for plotting</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Populating the interactive namespace from numpy and matplotlib
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import all our distributions</span>
+<span class="kn">import</span> <span class="nn">distributions</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># some funny python to make a list of all the distributions for convenience</span>
+<span class="n">all_distributions_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">name</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">distributions</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="nb">type</span><span class="p">)])</span>
+<span class="n">all_distributions_list</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">cls</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">distributions</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="nb">type</span><span class="p">)]</span>
+<span class="c1"># print out their names</span>
+<span class="n">all_distributions_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>dict_keys([&#39;Dist_rdm445&#39;, &#39;Dist_pr1392&#39;, &#39;Dist_pw1091&#39;, &#39;Dist_omr234&#39;, &#39;Dist_ap5312&#39;, &#39;Dist_os852&#39;, &#39;Dist_phh250&#39;, &#39;Dist_kc90&#39;, &#39;Dist_fh828&#39;, &#39;Dist_pme240&#39;, &#39;Dist_knd286&#39;, &#39;Dist_yz4244&#39;, &#39;Dist_mm7253&#39;, &#39;Dist_cas955&#39;, &#39;Dist_lwp226&#39;, &#39;Dist_lac683&#39;, &#39;Dist_fay221&#39;, &#39;Dist_jnt299&#39;])</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">all_distributions_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>18</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Do tests</span>
+<span class="n">ok_distributions_list</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">problems</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">all_distributions_list</span><span class="p">):</span>
+    <span class="c1">#print(cls)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+        <span class="n">N_test</span> <span class="o">=</span> <span class="mi">100000</span>
+        <span class="c1">#print(&#39;will try to generate for %s&#39; %(cls.__name__))</span>
+        <span class="k">if</span> <span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">x_min</span> <span class="o">+</span> <span class="o">.</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">x_max</span><span class="o">-</span><span class="n">dist</span><span class="o">.</span><span class="n">x_min</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1E-3</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;may have a problem&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+            
+        <span class="n">rvs</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">N_test</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rvs</span><span class="p">)</span> <span class="o">-</span> <span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">rvs</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N_test</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;means don&#39;t match for </span><span class="si">%s</span><span class="s2">: </span><span class="si">%f</span><span class="s2"> vs. </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> 
+                                                          <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rvs</span><span class="p">),</span> <span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
+            <span class="k">continue</span>
+            
+        <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">rvs</span><span class="p">)</span> <span class="o">-</span> <span class="n">dist</span><span class="o">.</span><span class="n">std</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">rvs</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.</span><span class="o">*</span><span class="n">N_test</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;std devs. don&#39;t match for </span><span class="si">%s</span><span class="s2">: </span><span class="si">%f</span><span class="s2"> vs. </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> 
+                                                          <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">rvs</span><span class="p">),</span> <span class="n">dist</span><span class="o">.</span><span class="n">std</span><span class="p">()))</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">rvs</span><span class="p">)</span> <span class="o">-</span> <span class="n">dist</span><span class="o">.</span><span class="n">std</span><span class="p">())</span> <span class="o">/</span> <span class="n">dist</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;std devs. don&#39;t match for </span><span class="si">%s</span><span class="s2">: </span><span class="si">%f</span><span class="s2"> vs. </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> 
+                                                          <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">rvs</span><span class="p">),</span> <span class="n">dist</span><span class="o">.</span><span class="n">std</span><span class="p">()))</span>
+            <span class="k">continue</span>
+        
+        <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">x_min</span><span class="p">,</span><span class="n">dist</span><span class="o">.</span><span class="n">x_max</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pdf was negative in some places&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>                    
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> passes tests, adding it&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+            <span class="n">ok_distributions_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> has errors, does&#39;t work&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+        <span class="k">continue</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;list of ok distributions:&quot;</span><span class="p">,[</span><span class="n">i</span><span class="o">.</span><span class="vm">__name__</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ok_distributions_list</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dist_os852 passes tests, adding it
+means don&#39;t match for Dist_pr1392: 0.732852 vs. 0.000000
+Dist_pw1091 passes tests, adding it
+means don&#39;t match for Dist_ap5312: 0.721174 vs. 0.800000
+Dist_kc90 passes tests, adding it
+std devs. don&#39;t match for Dist_fh828: 0.217878 vs. 0.181690
+means don&#39;t match for Dist_yz4244: 0.833356 vs. 0.166667
+means don&#39;t match for Dist_mm7253: 0.097384 vs. 0.119000
+std devs. don&#39;t match for Dist_jnt299: 0.040570 vs. 0.001646
+Dist_rdm445 passes tests, adding it
+Dist_phh250 passes tests, adding it
+std devs. don&#39;t match for Dist_pme240: 0.095205 vs. 0.040377
+Dist_knd286 passes tests, adding it
+means don&#39;t match for Dist_omr234: 0.665732 vs. 1.000000
+means don&#39;t match for Dist_cas955: 0.621786 vs. 0.000000
+means don&#39;t match for Dist_lwp226: 0.332858 vs. 2.500000
+Dist_lac683 passes tests, adding it
+means don&#39;t match for Dist_fay221: 0.499351 vs. 1.500000
+list of ok distributions: [&#39;Dist_os852&#39;, &#39;Dist_pw1091&#39;, &#39;Dist_kc90&#39;, &#39;Dist_rdm445&#39;, &#39;Dist_phh250&#39;, &#39;Dist_knd286&#39;, &#39;Dist_lac683&#39;]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">problems</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">all_distributions_list</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ok_distributions_list</span><span class="p">]</span>
+<span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="vm">__name__</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">problems</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;Dist_pr1392&#39;,
+ &#39;Dist_ap5312&#39;,
+ &#39;Dist_fh828&#39;,
+ &#39;Dist_yz4244&#39;,
+ &#39;Dist_mm7253&#39;,
+ &#39;Dist_jnt299&#39;,
+ &#39;Dist_pme240&#39;,
+ &#39;Dist_omr234&#39;,
+ &#39;Dist_cas955&#39;,
+ &#39;Dist_lwp226&#39;,
+ &#39;Dist_fay221&#39;]</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># how many samples for plots?</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100000</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Here&#39;s an example of usage</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">distributions</span><span class="o">.</span><span class="n">Dist_kc90</span><span class="p">()</span>
+<span class="n">rvs</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">rvs</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="nb">bin</span> <span class="ow">in</span> <span class="n">bins</span><span class="p">:</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="nb">bin</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;matplotlib.lines.Line2D at 0x103343ba8&gt;]</pre>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/central-limit-theorem/Central-Limit-Theorem_10_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dist</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.70710678118654757</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Let's-inspect-all-the-distributions-we-have">Let's inspect all the distributions we have<a class="anchor-link" href="#Let's-inspect-all-the-distributions-we-have"> </a></h2><p>Here we will loop over the different distributions and make a plot like the one above</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">plt</span><span class="o">.</span><span class="n">figaspect</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ok_distributions_list</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ok_distributions_list</span><span class="p">):</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+    <span class="n">rvs</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ok_distributions_list</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">rvs</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="c1"># depending on how you code up your pdf() function, numpy might not</span>
+    <span class="c1"># be able to &quot;broadcast&quot; (apply the function for each element of a numpy array)</span>
+    <span class="c1"># but this should always wrok</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="nb">bin</span> <span class="ow">in</span> <span class="n">bins</span><span class="p">:</span>
+        <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="nb">bin</span><span class="p">))</span>
+        
+    <span class="c1"># ok, now plot it</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="c1"># and let&#39;s check if the distribution is ok</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: std from samples = </span><span class="si">%.2f</span><span class="s2">, std from dist = </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)),</span> <span class="n">dist</span><span class="o">.</span><span class="n">std</span><span class="p">()))</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n_samples</span><span class="p">))</span> <span class="o">-</span> <span class="n">dist</span><span class="o">.</span><span class="n">std</span><span class="p">())</span> <span class="o">/</span> <span class="n">dist</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;looks like a problem with this distribution: &quot;</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dist_os852: std from samples = 0.66, std from dist = 0.65
+Dist_pw1091: std from samples = 0.88, std from dist = 0.89
+Dist_kc90: std from samples = 0.71, std from dist = 0.71
+Dist_rdm445: std from samples = 0.71, std from dist = 0.71
+Dist_phh250: std from samples = 0.24, std from dist = 0.24
+Dist_knd286: std from samples = 0.31, std from dist = 0.31
+Dist_lac683: std from samples = 0.58, std from dist = 0.54
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/central-limit-theorem/Central-Limit-Theorem_13_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Demonstration-of-the-Central-Limit-Theorem">Demonstration of the Central Limit Theorem<a class="anchor-link" href="#Demonstration-of-the-Central-Limit-Theorem"> </a></h2><p>ok, let's use one of the distributions to demonstrate the central limit theorem. We will use the same distribution $N$ times.</p>
+<p>First let's make a little helper function.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">do_convolution</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">10000</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+    <span class="n">var_q</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">mean_q</span> <span class="o">=</span> <span class="mf">0.</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">+</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+        <span class="n">var_q</span> <span class="o">=</span> <span class="n">var_q</span> <span class="o">+</span> <span class="n">dist</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">mean_q</span> <span class="o">=</span> <span class="n">mean_q</span> <span class="o">+</span> <span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="n">std_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="n">var_q</span> <span class="p">)</span>
+
+
+    <span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="n">mean_q</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">std_q</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now let's use it for $N=\{2,4,32\}$</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dist</span> <span class="o">=</span> <span class="n">distributions</span><span class="o">.</span><span class="n">Dist_kc90</span><span class="p">()</span>
+<span class="n">do_convolution</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/central-limit-theorem/Central-Limit-Theorem_17_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">do_convolution</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/central-limit-theorem/Central-Limit-Theorem_18_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">do_convolution</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span><span class="mi">32</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/central-limit-theorem/Central-Limit-Theorem_19_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>Gorgeous!</em></p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Now-let's-do-the-same-thing-randomly-using-different-distributions">Now let's do the same thing randomly using different distributions<a class="anchor-link" href="#Now-let's-do-the-same-thing-randomly-using-different-distributions"> </a></h2><p>To do this we will use <code>np.random.choice</code> to randomly choose from our list. Here's an example</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">],</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([&#39;d&#39;, &#39;c&#39;, &#39;d&#39;, &#39;c&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;c&#39;, &#39;b&#39;, &#39;a&#39;],
+      dtype=&#39;&lt;U1&#39;)</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now let's make a variation on the helper function above</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">do_random_convolution</span><span class="p">(</span><span class="n">list_of_distributions</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">10000</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+    <span class="n">var_q</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">mean_q</span> <span class="o">=</span> <span class="mf">0.</span>
+
+    <span class="k">for</span> <span class="n">dist_class</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">list_of_distributions</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">dist_class</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">dist_class</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">+</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+        <span class="n">var_q</span> <span class="o">=</span> <span class="n">var_q</span> <span class="o">+</span> <span class="n">dist</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">mean_q</span> <span class="o">=</span> <span class="n">mean_q</span> <span class="o">+</span> <span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="n">std_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="n">var_q</span> <span class="p">)</span>
+
+
+    <span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="n">mean_q</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">std_q</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">do_random_convolution</span><span class="p">(</span><span class="n">ok_distributions_list</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dist_kc90 0.707106781187
+Dist_phh250 0.235702260396
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/central-limit-theorem/Central-Limit-Theorem_25_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">do_random_convolution</span><span class="p">(</span><span class="n">ok_distributions_list</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dist_os852 0.6545248448388085
+Dist_pw1091 0.88669
+Dist_os852 0.6545248448388085
+Dist_rdm445 0.707106781187
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/central-limit-theorem/Central-Limit-Theorem_26_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">do_random_convolution</span><span class="p">(</span><span class="n">ok_distributions_list</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dist_kc90 0.707106781187
+Dist_os852 0.6545248448388085
+Dist_knd286 0.307054709393
+Dist_os852 0.6545248448388085
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/central-limit-theorem/Central-Limit-Theorem_27_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">do_random_convolution</span><span class="p">(</span><span class="n">ok_distributions_list</span><span class="p">,</span><span class="mi">32</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dist_phh250 0.235702260396
+Dist_rdm445 0.707106781187
+Dist_phh250 0.235702260396
+Dist_os852 0.6545248448388085
+Dist_lac683 0.539449062475
+Dist_phh250 0.235702260396
+Dist_os852 0.6545248448388085
+Dist_os852 0.6545248448388085
+Dist_phh250 0.235702260396
+Dist_rdm445 0.707106781187
+Dist_phh250 0.235702260396
+Dist_kc90 0.707106781187
+Dist_os852 0.6545248448388085
+Dist_phh250 0.235702260396
+Dist_lac683 0.539449062475
+Dist_phh250 0.235702260396
+Dist_lac683 0.539449062475
+Dist_kc90 0.707106781187
+Dist_pw1091 0.88669
+Dist_knd286 0.307054709393
+Dist_os852 0.6545248448388085
+Dist_kc90 0.707106781187
+Dist_os852 0.6545248448388085
+Dist_knd286 0.307054709393
+Dist_phh250 0.235702260396
+Dist_rdm445 0.707106781187
+Dist_phh250 0.235702260396
+Dist_pw1091 0.88669
+Dist_pw1091 0.88669
+Dist_rdm445 0.707106781187
+Dist_knd286 0.307054709393
+Dist_pw1091 0.88669
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/central-limit-theorem/Central-Limit-Theorem_28_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Part-2-of-project">Part 2 of project<a class="anchor-link" href="#Part-2-of-project"> </a></h1><h2 id="a)-preliminaries">a) preliminaries<a class="anchor-link" href="#a)-preliminaries"> </a></h2><p>From either master or the branch you used to submit your distribution, update so that you have the current version of <code>cranmer/intro-exp-phys-II</code>.</p>
+<p>You can either do this in GitHub desktop by finding the button near the top left or by typing this:</p>
+
+<pre><code>git fetch cranmer master
+git merge cranmer/master</code></pre>
+<p>Now Create a new branch called "part2"</p>
+<h2 id="b)-execute-the-notebook-above">b) execute the notebook above<a class="anchor-link" href="#b)-execute-the-notebook-above"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="c)-Make-a-$\chi^2$-function">c) Make a $\chi^2$ function<a class="anchor-link" href="#c)-Make-a-$\chi^2$-function"> </a></h2><p>Below is a copy of the <code>do_random_convolution</code> function with a new name. Modify it so taht it returns the chi-square quantity that says how closely the observed distribution matches the prediction from the Central Limit theorem.</p>
+<p>YOu might want to check out the <a href="chi-square-of-distribution.ipynb">chi-square-of-distribution</a> notebook</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">do_random_convolution_with_chi2</span><span class="p">(</span><span class="n">list_of_distributions</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100000</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+    <span class="n">var_q</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">mean_q</span> <span class="o">=</span> <span class="mf">0.</span>
+
+    <span class="k">for</span> <span class="n">dist_class</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">list_of_distributions</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">dist_class</span><span class="p">()</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">+</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+        <span class="n">var_q</span> <span class="o">=</span> <span class="n">var_q</span> <span class="o">+</span> <span class="n">dist</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">mean_q</span> <span class="o">=</span> <span class="n">mean_q</span> <span class="o">+</span> <span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="n">std_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="n">var_q</span> <span class="p">)</span>
+
+
+    <span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="n">mean_q</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">std_q</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="d)-Make-a-plot">d) Make a plot<a class="anchor-link" href="#d)-Make-a-plot"> </a></h2><p>Plot the $\chi^2$ quantity vs. N for N=2,4,8,16,32</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="e)-push-a-new-version-of-this-notebook-to-GitHub">e) push a new version of this notebook to GitHub<a class="anchor-link" href="#e)-push-a-new-version-of-this-notebook-to-GitHub"> </a></h2><p>Execute the notebook, get your plots, save it, commit the changes to the <code>part2</code> branch, and then push (sync) to GitHub.com.  When you are done, make a new pull request.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+    </main>
+    

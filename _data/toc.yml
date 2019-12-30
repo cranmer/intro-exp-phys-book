@@ -19,6 +19,9 @@
 
 - url: /introduction
   not_numbered: true
+  sections:
+  - url: /invitation
+  - url: /error-to-uncertainty
 
 
 - url: /error-propagation/introduction
@@ -36,13 +39,12 @@
 
 - url: /central-limit-theorem/Central-Limit-Theorem
   not_numbered: true
-  
-
 
 - divider: true
 - header: Coding reference
 
 - url: /python/programming-in-python
+  not_numbered: true
   sections:
   - url: /python/1/Expressions
   - url: /python/2/Names
@@ -54,6 +56,9 @@
     - url: /python/Strings
     - url: /python/Comparison
 
+- url: /notes-about-site
+  not_numbered: true
+
 - divider: true
 
 - url: /test_pages/test
@@ -63,3 +68,5 @@
     - url: /test_pages/equations
     - url: /test_pages/code
     - url: /test_pages/limits
+
+

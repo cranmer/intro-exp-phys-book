@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
   <title>Distributions</title>
-  <meta name="description" content="        Distributions    Some wordsSome equations $e^{i\pi}+1=0$\begin{equation}\frac{1}{\sqrt{2 \pi} \sigma}\end{equation}         ">
+  <meta name="description" content="        Distributions    When measuring a continuous quantity x the probability to get exactly a specific value of x is usually 0. Instead, one asks what is ...">
 
   <link rel="canonical" href="https://cranmer.github.io/intro-exp-phys-book/distributions/introduction.html">
   <link rel="alternate" type="application/rss+xml" title="Introduction to statistics for experimental physics" href="https://cranmer.github.io/intro-exp-phys-book/feed.xml">
@@ -14,7 +14,7 @@
   <meta property="og:url"         content="https://cranmer.github.io/intro-exp-phys-book/distributions/introduction.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Distributions" />
-<meta property="og:description" content="        Distributions    Some wordsSome equations $e^{i\pi}+1=0$\begin{equation}\frac{1}{\sqrt{2 \pi} \sigma}\end{equation}         " />
+<meta property="og:description" content="        Distributions    When measuring a continuous quantity x the probability to get exactly a specific value of x is usually 0. Instead, one asks what is ..." />
 <meta property="og:image"       content="https://cranmer.github.io/intro-exp-phys-book/images/logo/logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -26,9 +26,9 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "https://cranmer.github.io/intro-exp-phys-book/distributions/introduction.html",
   "headline": "Distributions",
-  "datePublished": "2019-12-30T13:45:11-05:00",
-  "dateModified": "2019-12-30T13:45:11-05:00",
-  "description": "        Distributions    Some wordsSome equations $e^{i\pi}+1=0$\begin{equation}\frac{1}{\sqrt{2 \pi} \sigma}\end{equation}         ",
+  "datePublished": "2019-12-30T15:38:57-05:00",
+  "dateModified": "2019-12-30T15:38:57-05:00",
+  "description": "        Distributions    When measuring a continuous quantity x the probability to get exactly a specific value of x is usually 0. Instead, one asks what is ...",
   "author": {
     "@type": "Person",
     "name": "Kyle Cranmer"
@@ -52,7 +52,7 @@
 }
 
   </script>
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/intro-exp-phys-book/assets/css/styles.css">
 
   <!-- <link rel="manifest" href="/manifest.json"> -->
   <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#efae0a"> -->
@@ -61,7 +61,7 @@
   <meta name="theme-color" content="#233947">
 
   <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="/images/logo/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="/intro-exp-phys-book/images/logo/favicon.ico">
 
   <!-- MathJax Config -->
   <!-- Allow inline math using $ and automatically break long math lines -->
@@ -89,19 +89,19 @@ MathJax.Hub.Config({
 
 
   <!-- DOM updating function -->
-  <script src="/assets/js/page/dom-update.js"></script>
+  <script src="/intro-exp-phys-book/assets/js/page/dom-update.js"></script>
 
   <!-- Selectors for elements on the page -->
-  <script src="/assets/js/page/documentSelectors.js"></script>
+  <script src="/intro-exp-phys-book/assets/js/page/documentSelectors.js"></script>
 
   <!-- Define some javascript variables that will be useful in other javascript -->
   <script>
-    const site_basename = '';
+    const site_basename = '/intro-exp-phys-book';
   </script>
 
   <!-- Add AnchorJS to let headers be linked -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js" async></script>
-  <script src="/assets/js/page/anchors.js" async></script>
+  <script src="/intro-exp-phys-book/assets/js/page/anchors.js" async></script>
 
   <!-- Include Turbolinks to make page loads fast -->
   <!-- https://github.com/turbolinks/turbolinks -->
@@ -123,7 +123,7 @@ MathJax.Hub.Config({
 
 const thebelabCellButton = id =>
   `<a id="thebelab-cell-button-${id}" class="btn thebebtn o-tooltip--left" data-tooltip="Interactive Mode">
-    <img src="/assets/images/edit-button.svg" alt="Start thebelab interactive mode">
+    <img src="/intro-exp-phys-book/assets/images/edit-button.svg" alt="Start thebelab interactive mode">
   </a>`
 
 
@@ -237,7 +237,7 @@ var detectLanguage = (language) => {
 
   <!-- Load the auto-generating TOC (non-async otherwise the TOC won't load w/ turbolinks) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.8.1/tocbot.min.js" async></script>
-  <script src="/assets/js/page/tocbot.js"></script>
+  <script src="/intro-exp-phys-book/assets/js/page/tocbot.js"></script>
 
   <!-- Google analytics -->
   
@@ -257,11 +257,11 @@ var detectLanguage = (language) => {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script>
 
   <!-- Load custom website scripts -->
-  <script src="/assets/js/scripts.js" async></script>
+  <script src="/intro-exp-phys-book/assets/js/scripts.js" async></script>
 
   <!-- Load custom user CSS and JS  -->
-  <script src="/assets/custom/custom.js" async></script>
-  <link rel="stylesheet" href="/assets/custom/custom.css">
+  <script src="/intro-exp-phys-book/assets/custom/custom.js" async></script>
+  <link rel="stylesheet" href="/intro-exp-phys-book/assets/custom/custom.css">
 
   <!-- Update interact links w/ REST param, is defined in includes so we can use templates -->
   
@@ -325,7 +325,7 @@ function addParamToInternalLinks(hub) {
   var links = document.querySelectorAll("a").forEach(function(link) {
     var href = link.href;
     // If the link is an internal link...
-    if (href.search("https://cranmer.github.io/intro-exp-phys-book") !== -1 || href.startsWith('/') || href.search("127.0.0.1:") !== -1) {
+    if (href.search("https://cranmer.github.io") !== -1 || href.startsWith('/') || href.search("127.0.0.1:") !== -1) {
       // Assume we're an internal link, add the hub param to it
       var params = getJsonFromUrl(href);
       if (params !== false) {
@@ -496,10 +496,10 @@ initFunction(initQuery);
 </script>
 
   <!-- Load JS that depends on site variables -->
-  <script src="/assets/js/page/copy-button.js" async></script>
+  <script src="/intro-exp-phys-book/assets/js/page/copy-button.js" async></script>
 
   <!-- Hide cell code -->
-  <script src="/assets/js/page/hide-cell.js" async></script>
+  <script src="/intro-exp-phys-book/assets/js/page/hide-cell.js" async></script>
 
   <!-- Printing the screen -->
   <!-- Include nbinteract for interactive widgets -->
@@ -519,7 +519,7 @@ printContent = () => {
     printJS({
         printable: 'textbook_content',
         type: 'html',
-        css: "/assets/css/styles.css",
+        css: "/intro-exp-phys-book/assets/css/styles.css",
         style: "#textbook_content {padding-top: 40px};",
         scanStyles: false,
         targetStyles: ["*"],
@@ -563,7 +563,7 @@ initFunction(initPrint)
 
 
 <nav id="js-sidebar" class="c-textbook__sidebar">
-  <a href="https://cranmer.github.io/intro-exp-phys-book"><img src="/images/logo/logo.png" class="textbook_logo" id="sidebar-logo" alt="textbook logo" data-turbolinks-permanent/></a>
+  <a href="/intro-exp-phys-book/"><img src="/intro-exp-phys-book/images/logo/logo.png" class="textbook_logo" id="sidebar-logo" alt="textbook logo" data-turbolinks-permanent/></a>
   <h2 class="c-sidebar__title">Introduction to statistics for experimental physics</h2>
   <ul class="c-sidebar__chapters">
     
@@ -579,7 +579,7 @@ initFunction(initPrint)
       
       <li class="c-sidebar__chapter" data-url="/introduction">
         <a class="c-sidebar__entry"
-          href="/introduction.html"
+          href="/intro-exp-phys-book/introduction.html"
         >
           
           Introduction
@@ -594,6 +594,52 @@ initFunction(initPrint)
       
       
 
+      
+        
+
+        
+
+        <ul class="c-sidebar__sections u-hidden-visually">
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/invitation">
+              <a class="c-sidebar__entry"
+                href="/intro-exp-phys-book/invitation.html"
+              >
+                
+                An invitation
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/error-to-uncertainty">
+              <a class="c-sidebar__entry"
+                href="/intro-exp-phys-book/error-to-uncertainty.html"
+              >
+                
+                From Error to uncertainty
+              </a>
+            </li>
+            
+            
+          
+        </ul>
       
 
       
@@ -610,7 +656,7 @@ initFunction(initPrint)
       
       <li class="c-sidebar__chapter" data-url="/error-propagation/introduction">
         <a class="c-sidebar__entry"
-          href="/error-propagation/introduction.html"
+          href="/intro-exp-phys-book/error-propagation/introduction.html"
         >
           
           Error propagation
@@ -642,7 +688,7 @@ initFunction(initPrint)
 
             <li class="c-sidebar__section" data-url="/error-propagation/investigating-propagation-of-errors">
               <a class="c-sidebar__entry"
-                href="/error-propagation/investigating-propagation-of-errors.html"
+                href="/intro-exp-phys-book/error-propagation/investigating-propagation-of-errors.html"
               >
                 
                 Investigating-propagation-of-errors
@@ -661,7 +707,7 @@ initFunction(initPrint)
 
             <li class="c-sidebar__section" data-url="/error-propagation/prop-error-plots">
               <a class="c-sidebar__entry"
-                href="/error-propagation/prop-error-plots.html"
+                href="/intro-exp-phys-book/error-propagation/prop-error-plots.html"
               >
                 
                 Investigating-propagation-of-errors
@@ -680,7 +726,7 @@ initFunction(initPrint)
 
             <li class="c-sidebar__section" data-url="/error-propagation/track-example">
               <a class="c-sidebar__entry"
-                href="/error-propagation/track-example.html"
+                href="/intro-exp-phys-book/error-propagation/track-example.html"
               >
                 
                 Track-example
@@ -706,7 +752,7 @@ initFunction(initPrint)
       
       <li class="c-sidebar__chapter" data-url="/distributions/introduction">
         <a class="c-sidebar__entry"
-          href="/distributions/introduction.html"
+          href="/intro-exp-phys-book/distributions/introduction.html"
         >
           
           Distributions
@@ -738,7 +784,7 @@ initFunction(initPrint)
 
             <li class="c-sidebar__section" data-url="/distributions/change-of-variables">
               <a class="c-sidebar__entry"
-                href="/distributions/change-of-variables.html"
+                href="/intro-exp-phys-book/distributions/change-of-variables.html"
               >
                 
                 Change-of-variables
@@ -757,7 +803,7 @@ initFunction(initPrint)
 
             <li class="c-sidebar__section" data-url="/distributions/accept-reject">
               <a class="c-sidebar__entry"
-                href="/distributions/accept-reject.html"
+                href="/intro-exp-phys-book/distributions/accept-reject.html"
               >
                 
                 Accept-reject
@@ -783,7 +829,7 @@ initFunction(initPrint)
       
       <li class="c-sidebar__chapter" data-url="/central-limit-theorem/Central-Limit-Theorem">
         <a class="c-sidebar__entry"
-          href="/central-limit-theorem/Central-Limit-Theorem.html"
+          href="/intro-exp-phys-book/central-limit-theorem/Central-Limit-Theorem.html"
         >
           
           Central-limit-theorem
@@ -822,10 +868,8 @@ initFunction(initPrint)
       
       <li class="c-sidebar__chapter" data-url="/python/programming-in-python">
         <a class="c-sidebar__entry"
-          href="/python/programming-in-python.html"
+          href="/intro-exp-phys-book/python/programming-in-python.html"
         >
-          
-            1.
           
           Programming in Python
         </a>
@@ -856,10 +900,8 @@ initFunction(initPrint)
 
             <li class="c-sidebar__section" data-url="/python/1/Expressions">
               <a class="c-sidebar__entry"
-                href="/python/1/Expressions.html"
+                href="/intro-exp-phys-book/python/1/Expressions.html"
               >
-                
-                  1.1
                 
                 Expressions
               </a>
@@ -877,10 +919,8 @@ initFunction(initPrint)
 
             <li class="c-sidebar__section" data-url="/python/2/Names">
               <a class="c-sidebar__entry"
-                href="/python/2/Names.html"
+                href="/intro-exp-phys-book/python/2/Names.html"
               >
-                
-                  1.2
                 
                 Names
               </a>
@@ -898,10 +938,8 @@ initFunction(initPrint)
 
             <li class="c-sidebar__section" data-url="/python/3/Calls">
               <a class="c-sidebar__entry"
-                href="/python/3/Calls.html"
+                href="/intro-exp-phys-book/python/3/Calls.html"
               >
-                
-                  1.3
                 
                 Calls
               </a>
@@ -919,10 +957,8 @@ initFunction(initPrint)
 
             <li class="c-sidebar__section" data-url="/python/4/Introduction_to_Tables">
               <a class="c-sidebar__entry"
-                href="/python/4/Introduction_to_Tables.html"
+                href="/intro-exp-phys-book/python/4/Introduction_to_Tables.html"
               >
-                
-                  1.4
                 
                 Introduction To Tables
               </a>
@@ -940,10 +976,8 @@ initFunction(initPrint)
 
             <li class="c-sidebar__section" data-url="/python/Types">
               <a class="c-sidebar__entry"
-                href="/python/Types.html"
+                href="/intro-exp-phys-book/python/Types.html"
               >
-                
-                  1.5
                 
                 Types
               </a>
@@ -952,6 +986,37 @@ initFunction(initPrint)
             
           
         </ul>
+      
+
+      
+    
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter" data-url="/notes-about-site">
+        <a class="c-sidebar__entry"
+          href="/intro-exp-phys-book/notes-about-site.html"
+        >
+          
+          Notes about this book
+        </a>
+      </li>
+
+      
+      
+
+      
+
+      
+      
+
       
 
       
@@ -972,7 +1037,7 @@ initFunction(initPrint)
       
       <li class="c-sidebar__chapter" data-url="/test_pages/test">
         <a class="c-sidebar__entry"
-          href="/test_pages/test.html"
+          href="/intro-exp-phys-book/test_pages/test.html"
         >
           
           Test pages
@@ -1004,7 +1069,7 @@ initFunction(initPrint)
 
             <li class="c-sidebar__section" data-url="/test_pages/layout_elements">
               <a class="c-sidebar__entry"
-                href="/test_pages/layout_elements.html"
+                href="/intro-exp-phys-book/test_pages/layout_elements.html"
               >
                 
                 Testing page elements
@@ -1023,7 +1088,7 @@ initFunction(initPrint)
 
             <li class="c-sidebar__section" data-url="/test_pages/equations">
               <a class="c-sidebar__entry"
-                href="/test_pages/equations.html"
+                href="/intro-exp-phys-book/test_pages/equations.html"
               >
                 
                 Mathematical equations
@@ -1042,7 +1107,7 @@ initFunction(initPrint)
 
             <li class="c-sidebar__section" data-url="/test_pages/code">
               <a class="c-sidebar__entry"
-                href="/test_pages/code.html"
+                href="/intro-exp-phys-book/test_pages/code.html"
               >
                 
                 Testing code blocks
@@ -1061,7 +1126,7 @@ initFunction(initPrint)
 
             <li class="c-sidebar__section" data-url="/test_pages/limits">
               <a class="c-sidebar__entry"
-                href="/test_pages/limits.html"
+                href="/intro-exp-phys-book/test_pages/limits.html"
               >
                 
                 Demo page to showcase markdown
@@ -1093,7 +1158,7 @@ initFunction(initPrint)
     </button>
     <div class="buttons">
 <div class="download-buttons-dropdown">
-    <button id="dropdown-button-trigger" class="interact-button"><img src="/assets/images/download-solid.svg" alt="Download" /></button>
+    <button id="dropdown-button-trigger" class="interact-button"><img src="/intro-exp-phys-book/assets/images/download-solid.svg" alt="Download" /></button>
     <div class="download-buttons">
         
         <a id="interact-button-print"><button id="interact-button-download" class="interact-button">.pdf</button></a>
@@ -1106,12 +1171,12 @@ initFunction(initPrint)
   </div>
   <!-- Empty sidebar placeholder that we'll auto-fill with javascript -->
   <aside class="sidebar__right">
-    <header><h4 class="nav__title"><img src="/assets/images/list-solid.svg" alt="Search" />   On this page</h4></header>
+    <header><h4 class="nav__title"><img src="/intro-exp-phys-book/assets/images/list-solid.svg" alt="Search" />   On this page</h4></header>
     <nav class="onthispage">
     </nav>
   </aside>
-  <a href="/search.html" class="topbar-right-button" id="search-button">
-    <img src="/assets/images/search-solid.svg" alt="Search" />
+  <a href="/intro-exp-phys-book/search.html" class="topbar-right-button" id="search-button">
+    <img src="/intro-exp-phys-book/assets/images/search-solid.svg" alt="Search" />
   </a>
 </div>
 
@@ -1125,11 +1190,76 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Some words</p>
-<p>Some equations $e^{i\pi}+1=0$</p>
-\begin{equation}
-\frac{1}{\sqrt{2 \pi} \sigma}
-\end{equation}
+<p>When measuring a continuous quantity x the probability to get exactly a specific value of x is usually 0. Instead, one asks what is the probability to get x in some range.
+The probability to find x in the range [x,x+dx] is f(x) dx, where f(x) is called a probability density function, or “distribution” for short.
+Normalization
+The probability that one obtains x in the full range must be one, so we have the
+normalization condition Z
+f(x)dx = 1
+Change of variables
+If we change variables from x to y(x) then we should have P(a&lt;x&lt;b) = P(y(a) &lt; y &lt; y(b)). If we call the distributions f(x) and g(y), then we can write these two probabilities as integrals
+ Z b
+Z y(b)
+f(x)dx =
+by change of variables, we can re-write the integral on the right-hand side as
+Z b
+f(x)dx =
+a
+Histograms
+Z b a
+,thus
+f(x) = g(y) dx 
+   .
+a
+d y g(y(x))dxdx
+y(a)
+g(y)dy</p>
+<h2 id="Histograms">Histograms<a class="anchor-link" href="#Histograms"> </a></h2><p>Repeated observations {xi} = {x1, ...., xn} can be thought of as “samples” from the distribution f(x). A common way to estimate the true, underlying parent distribution for these samples is the histogram. One defines ranges of x, called “bins”, and counts how many of the samples fall in each bin.
+A normalized histogram is formed by dividing each of the bin counts by the total number of samples. This way, the sum of the normalized histogram bins is 1. Due to the properties of the Poisson distribution (below), an estimate for the uncertainty in the bin is 1/√ n .</p>
+<h2 id="Gaussian-(or-Normal)-Distribution-[Ch-5.3]">Gaussian (or Normal) Distribution [Ch 5.3]<a class="anchor-link" href="#Gaussian-(or-Normal)-Distribution-[Ch-5.3]"> </a></h2><p>The most common distribution we encounter is the Gaussian or Normal distribution. It is characterized (or parametrized) by two quantities: the mean μ and standard deviation σ. The probability density function is given by the following equation:
+G(x|μ,  ) = p 1 e 2⇡ 
+ 
+(x μ)2 2 2
+  To help remember this, think of a parabola centered at μ. You can use dimensional analysis to remember that it is σ2 in the denominator of the exponential. Also remember that if σ is smaller the distribution is narrower, so it must also be taller for the normalization integral to be 1. The minus sign in the exponential is easy to remember, because if x is far from μ, then the probability must be very small.
+Notice, that the probability density can be larger than 1 ,for example G(0|0, 1/2π) &gt; 1.</p>
+<h2 id="Poisson-Distribution-[Ch-11]">Poisson Distribution [Ch 11]<a class="anchor-link" href="#Poisson-Distribution-[Ch-11]"> </a></h2><p>The Poisson distribution describes the probability to have n events occur when μ are expected. For example, if one expects μ =3.14 decays of a radioactive particle in one day, it gives the probability to observe n=0,1,2,3,4,.... decays in a day. Note, this is not a probability density because n is discrete.
+μn e μ
+Poisp(n|μ) =
+ =μ n ̄=μ
+μ and σ=√μ. Notice that the relative uncertainty drops like: σ/μ ~ 1/√μ .</p>
+<h2 id="Binomial-Distribution-[Ch-10]">Binomial Distribution [Ch 10]<a class="anchor-link" href="#Binomial-Distribution-[Ch-10]"> </a></h2><p>The binomial distribution describes the probability to have exactly k successes given n independent trials, when p is the probability of success for a single trial. The first part of the equation is a “combinatorial factor” that describes for all the ways one can have k successes. When n is much larger than k it is approximately a Poisson distribution.
+PAGE 2 OF 7
+PROF. KYLE CRANMER
+Binomial(k|n,p)=
+n! k n k
+  (k)=np(1 p)
+p (1 p) k=np</p>
+<h2 id="The-meaning-of-statistical-uncertainty-[~Ch-4-&amp;-5]">The meaning of statistical uncertainty [~Ch 4 &amp; 5]<a class="anchor-link" href="#The-meaning-of-statistical-uncertainty-[~Ch-4-&amp;-5]"> </a></h2><p>Three ways to discuss statistical uncertainty</p>
+
+<pre><code>1. The true mean and standard deviation from a distribution f(x) are unknown to the experimenter that doesn’t know true underlying distribution -- Sec [5.2]
+</code></pre>
+<p>• The variance (standard deviation squared) and mean are defined by integrals  2 =Z (x μ)2f(x)dx μ=Z xf(x)dx
+• This is our goal.
+The estimate of standard deviation from a repeated observations {xi} -- [Sec. 4.2]
+• The observations are “samples” from the true distribution f(x)
+• A histogram of the {xi} is an approximation of the distribution f(x)
+• The “sample mean” and “sample variance” are estimates of the true mean and variance defined by sums
+  n2 =
+1 Xn n   1 i=1
+( x i   x ̄ ) 2
+x ̄ =
+1 Xn n i=1
+x i</p>
+
+<pre><code>3. 
+</code></pre>
+<p>• The ”n-1” is so that the estimate of the variance is unbiased. Using 1/n is biased.
+• This is the best we can do as experimentalists
+The estimate of uncertainty in a single observation: eg. x± δ x -- [Sec 4.3]
+• This is what you typically do in a lab. There is no equation, this is where you have to use your judgement
+• Your goal is that δx is close to σ
+• The meaning is that if you were to repeat the measurements several times (and nothing else changed), the values you observe would spread around the true, unknown value. The size of this spread is our statistical uncertainty.</p>
+
 </div>
 </div>
 </div>
@@ -1148,7 +1278,7 @@ initFunction(initPrint)
     
     
 
-    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/error-propagation/track-example.html">
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/intro-exp-phys-book/error-propagation/track-example.html">
       〈 <span class="u-margin-right-tiny"></span> Track-example
     </a>
   
@@ -1157,7 +1287,7 @@ initFunction(initPrint)
     
 
     
-    <a id="js-page__nav__next" class="c-page__nav__next" href="/distributions/change-of-variables.html">
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/intro-exp-phys-book/distributions/change-of-variables.html">
       Change-of-variables <span class="u-margin-right-tiny"></span> 〉
     </a>
   

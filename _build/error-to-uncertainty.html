@@ -1,0 +1,75 @@
+---
+title: |-
+  From Error to uncertainty
+pagenum: 2
+prev_page:
+  url: /invitation.html
+next_page:
+  url: /error-propagation/introduction.html
+suffix: .md
+search: x equation n uncertainty true f mean distribution variance begin equiv end xi statistical standard deviation sec where estimate meaning unknown defined sigma int mu dx our goal observations sample frac sum bar delta spread error ch three ways discuss experimenter doesnt underlying squared integrals repeated samples histogram approximation estimates sums sigman unbiased using biased best experimentalists data without additional assumptions single observation eg pm typically lab judgement close repeat measurements several times nothing else changed values observe around value size
+
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+
+    <main class="jupyter-page">
+    <div id="page-info"><div id="page-title">From Error to uncertainty</div>
+</div>
+    
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-meaning-of-statistical-uncertainty-[~Ch-4-&amp;-5]">The meaning of statistical uncertainty [~Ch 4 &amp; 5]<a class="anchor-link" href="#The-meaning-of-statistical-uncertainty-[~Ch-4-&amp;-5]"> </a></h2><p>Three ways to discuss statistical uncertainty</p>
+<ol>
+<li><p>The true mean and standard deviation from a distribution f(x) are unknown to the experimenter that doesn’t know true underlying distribution -- Sec [5.2]</p>
+<ul>
+<li>The variance (standard deviation squared) and mean are defined by integrals 
+\begin{equation}
+\sigma^2 \equiv \int (x-\mu)^2 f(x) dx
+\end{equation}
+where
+\begin{equation}
+\mu \equiv \int x f(x) dx
+\end{equation}</li>
+<li>This is our goal.</li>
+</ul>
+</li>
+<li><p>The estimate of standard deviation from a repeated observations $\{x_i\}$ -- [Sec. 4.2]</p>
+<ul>
+<li>The observations are “samples” from the true distribution $f(x)$</li>
+<li>A histogram of the $\{x_i\}$ is an approximation of the distribution $f(x)$</li>
+<li><p>The “sample mean” and “sample variance” are estimates of the true mean and variance defined by sums</p>
+<p>\begin{equation}
+\sigma^2_n \equiv \frac{1}{n-1}\sum_{i=1}^n (x_i-\bar{x})^2 
+\end{equation}
+where
+\begin{equation}
+\bar{x} \equiv \frac{1}{n}\sum_{i=1}^n x_i 
+\end{equation}</p>
+</li>
+<li><p>The ”n-1” is so that the estimate of the variance is unbiased. Using 1/n is biased.</p>
+</li>
+<li>This is the best we can do as experimentalists from data without additional assumptions.</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li>The estimate of uncertainty in a single observation: eg. $x \pm \delta x$ -- [Sec 4.3]<ul>
+<li>This is what you typically do in a lab. There is no equation, this is where you have to use your judgement</li>
+<li>Your goal is that $\delta x$ is close to $\sigma$</li>
+<li>The meaning is that if you were to repeat the measurements several times (and nothing else changed), the values you observe would spread around the true, unknown value. The size of this spread is our statistical uncertainty.</li>
+</ul>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+    </main>
+    

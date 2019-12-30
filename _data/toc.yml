@@ -28,7 +28,7 @@
   not_numbered: true
   sections:
     - url: /error-propagation/investigating-propagation-of-errors
-    - url: /error-propagation/prop-error-plots
+    #- url: /error-propagation/prop-error-plots
     - url: /error-propagation/track-example
 
 - url: /distributions/introduction

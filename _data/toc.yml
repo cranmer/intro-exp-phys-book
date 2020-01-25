@@ -22,6 +22,7 @@
   sections:
   - url: /invitation
   - url: /error-to-uncertainty
+  - url: /timing_example
 
 
 - url: /error-propagation/introduction

@@ -5,16 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
-  <title>Revisiting error propagation with automatic differentiation</title>
-  <meta name="description" content="        Revisiting error propagation with automatic differentiation    By Kyle Cranmer, March 2, 2020This notebook is dedicated to Feeman Dyson, who died on ...">
+  <title>Proagation of Uncertainty with autodiff</title>
+  <meta name="description" content="        Proagation of Uncertainty with autodiff    Revisiting error propagation with automatic differentiation By Kyle Cranmer, March 2, 2020This notebook is...">
 
   <link rel="canonical" href="https://cranmer.github.io/intro-exp-phys-book/error-propagation/error_propagation_with_jax.html">
   <link rel="alternate" type="application/rss+xml" title="Introduction to statistics for experimental physics" href="https://cranmer.github.io/intro-exp-phys-book/feed.xml">
 
   <meta property="og:url"         content="https://cranmer.github.io/intro-exp-phys-book/error-propagation/error_propagation_with_jax.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Revisiting error propagation with automatic differentiation" />
-<meta property="og:description" content="        Revisiting error propagation with automatic differentiation    By Kyle Cranmer, March 2, 2020This notebook is dedicated to Feeman Dyson, who died on ..." />
+<meta property="og:title"       content="Proagation of Uncertainty with autodiff" />
+<meta property="og:description" content="        Proagation of Uncertainty with autodiff    Revisiting error propagation with automatic differentiation By Kyle Cranmer, March 2, 2020This notebook is..." />
 <meta property="og:image"       content="https://cranmer.github.io/intro-exp-phys-book/images/logo/logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -25,10 +25,10 @@
   "@context": "http://schema.org",
   "@type": "NewsArticle",
   "mainEntityOfPage": "https://cranmer.github.io/intro-exp-phys-book/error-propagation/error_propagation_with_jax.html",
-  "headline": "Revisiting error propagation with automatic differentiation",
-  "datePublished": "2020-03-02T14:27:25-05:00",
-  "dateModified": "2020-03-02T14:27:25-05:00",
-  "description": "        Revisiting error propagation with automatic differentiation    By Kyle Cranmer, March 2, 2020This notebook is dedicated to Feeman Dyson, who died on ...",
+  "headline": "Proagation of Uncertainty with autodiff",
+  "datePublished": "2020-03-02T16:58:43-05:00",
+  "dateModified": "2020-03-02T16:58:43-05:00",
+  "description": "        Proagation of Uncertainty with autodiff    Revisiting error propagation with automatic differentiation By Kyle Cranmer, March 2, 2020This notebook is...",
   "author": {
     "@type": "Person",
     "name": "Kyle Cranmer"
@@ -599,7 +599,7 @@ initFunction(initPrint)
 
         
 
-        <ul class="c-sidebar__sections u-hidden-visually">
+        <ul class="c-sidebar__sections">
           
             
             
@@ -633,7 +633,7 @@ initFunction(initPrint)
                 href="/intro-exp-phys-book/error-to-uncertainty.html"
               >
                 
-                From Error to uncertainty
+                From Error to Uncertainty
               </a>
             </li>
             
@@ -652,7 +652,7 @@ initFunction(initPrint)
                 href="/intro-exp-phys-book/timing_example.html"
               >
                 
-                An in-class interactive demo on uncertainty
+                An in-class example
               </a>
             </li>
             
@@ -695,7 +695,7 @@ initFunction(initPrint)
 
         
 
-        <ul class="c-sidebar__sections u-hidden-visually">
+        <ul class="c-sidebar__sections">
           
             
             
@@ -710,7 +710,7 @@ initFunction(initPrint)
                 href="/intro-exp-phys-book/error-propagation/investigating-propagation-of-errors.html"
               >
                 
-                Investigating-propagation-of-errors
+                Investigating Proagation of Uncertainty
               </a>
             </li>
             
@@ -729,7 +729,7 @@ initFunction(initPrint)
                 href="/intro-exp-phys-book/error-propagation/error_propagation_with_jax.html"
               >
                 
-                Revisiting error propagation with automatic differentiation
+                Proagation of Uncertainty with autodiff
               </a>
             </li>
             
@@ -748,7 +748,7 @@ initFunction(initPrint)
                 href="/intro-exp-phys-book/error-propagation/track-example.html"
               >
                 
-                Track-example
+                An example and a surprise
               </a>
             </li>
             
@@ -791,7 +791,7 @@ initFunction(initPrint)
 
         
 
-        <ul class="c-sidebar__sections u-hidden-visually">
+        <ul class="c-sidebar__sections">
           
             
             
@@ -806,7 +806,7 @@ initFunction(initPrint)
                 href="/intro-exp-phys-book/distributions/change-of-variables.html"
               >
                 
-                Change-of-variables
+                Change of variables
               </a>
             </li>
             
@@ -825,7 +825,7 @@ initFunction(initPrint)
                 href="/intro-exp-phys-book/distributions/one-over-x-flow.html"
               >
                 
-                One-over-x-flow
+                An example with with autodiff
               </a>
             </li>
             
@@ -844,7 +844,7 @@ initFunction(initPrint)
                 href="/intro-exp-phys-book/distributions/accept-reject.html"
               >
                 
-                Accept-reject
+                Accept / Reject Monte Carlo
               </a>
             </li>
             
@@ -1238,14 +1238,14 @@ initFunction(initPrint)
       <main class="c-textbook__page" tabindex="-1">
             <div class="c-textbook__content" id="textbook_content">
                   <main class="jupyter-page">
-    <div id="page-info"><div id="page-title">Revisiting error propagation with automatic differentiation</div>
+    <div id="page-info"><div id="page-title">Proagation of Uncertainty with autodiff</div>
 </div>
     
 <div class="jb_cell">
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>By Kyle Cranmer, March 2, 2020</p>
+<h1 id="Revisiting-error-propagation-with-automatic-differentiation">Revisiting error propagation with automatic differentiation<a class="anchor-link" href="#Revisiting-error-propagation-with-automatic-differentiation"> </a></h1><p>By Kyle Cranmer, March 2, 2020</p>
 <p>This notebook is dedicated to Feeman Dyson, who died on February 28, 2020 in Princeton, NJ at the age of 96.</p>
 <h3 id="&#8220;New-directions-in-science-are-launched-by-new-tools-much-more-often-than-by-new-concepts.-The-effect-of-a-concept-driven-revolution-is-to-explain-old-things-in-new-ways.-The-effect-of-a-tool-driven-revolution-is-to-discover-new-things-that-have-to-be-explained.&#8221;">&#8220;New directions in science are launched by new tools much more often than by new concepts. The effect of a concept-driven revolution is to explain old things in new ways. The effect of a tool-driven revolution is to discover new things that have to be explained.&#8221;<a class="anchor-link" href="#&#8220;New-directions-in-science-are-launched-by-new-tools-much-more-often-than-by-new-concepts.-The-effect-of-a-concept-driven-revolution-is-to-explain-old-things-in-new-ways.-The-effect-of-a-tool-driven-revolution-is-to-discover-new-things-that-have-to-be-explained.&#8221;"> </a></h3><p>-- Freeman Dyson</p>
 <p><img src="https://www.ias.edu/sites/default/files/styles/grid_feature_teaser/public/Dyson_Freeman_Dyson_20151016_DKomoda-5376%20%281200%29.jpg?itok=oGwqWjL8![image.png](attachment:image.png" alt="">)</p>
@@ -2426,7 +2426,7 @@ z = (18 ± 4) .</p>
     
 
     <a id="js-page__nav__prev" class="c-page__nav__prev" href="/intro-exp-phys-book/error-propagation/investigating-propagation-of-errors.html">
-      〈 <span class="u-margin-right-tiny"></span> Investigating-propagation-of-errors
+      〈 <span class="u-margin-right-tiny"></span> Investigating Proagation of Uncert...
     </a>
   
 
@@ -2435,7 +2435,7 @@ z = (18 ± 4) .</p>
 
     
     <a id="js-page__nav__next" class="c-page__nav__next" href="/intro-exp-phys-book/error-propagation/track-example.html">
-      Track-example <span class="u-margin-right-tiny"></span> 〉
+      An example and a surprise <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>

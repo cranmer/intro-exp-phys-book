@@ -19,26 +19,39 @@
 
 - url: /introduction
   not_numbered: true
+  expand_sections: true
   sections:
   - url: /invitation
+    title: An invitation 
   - url: /error-to-uncertainty
+    title: From Error to Uncertainty 
   - url: /timing_example
+    title: An in-class example 
 
 
 - url: /error-propagation/introduction
   not_numbered: true
+  expand_sections: true
   sections:
     - url: /error-propagation/investigating-propagation-of-errors
+      title: Investigating Proagation of Uncertainty 
     #- url: /error-propagation/prop-error-plots
     - url: /error-propagation/error_propagation_with_jax
+      title: Proagation of Uncertainty with autodiff
     - url: /error-propagation/track-example
+      title: An example and a surprise
 
 - url: /distributions/introduction
+  title: Distributions 
   not_numbered: true
+  expand_sections: true
   sections:
     - url: /distributions/change-of-variables
+      title: Change of variables
     - url: /distributions/one-over-x-flow
+      title: An example with with autodiff
     - url: /distributions/accept-reject
+      title: Accept / Reject Monte Carlo
 
 - url: /central-limit-theorem/Central-Limit-Theorem
   not_numbered: true

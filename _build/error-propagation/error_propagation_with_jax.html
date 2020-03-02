@@ -6,7 +6,7 @@ kernel_name: python3
 kernel_path: content/error-propagation
 has_widgets: false
 title: |-
-  Revisiting error propagation with automatic differentiation
+  Proagation of Uncertainty with autodiff
 pagenum: 6
 prev_page:
   url: /error-propagation/investigating-propagation-of-errors.html
@@ -19,14 +19,14 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
 ---
 
     <main class="jupyter-page">
-    <div id="page-info"><div id="page-title">Revisiting error propagation with automatic differentiation</div>
+    <div id="page-info"><div id="page-title">Proagation of Uncertainty with autodiff</div>
 </div>
     
 <div class="jb_cell">
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>By Kyle Cranmer, March 2, 2020</p>
+<h1 id="Revisiting-error-propagation-with-automatic-differentiation">Revisiting error propagation with automatic differentiation<a class="anchor-link" href="#Revisiting-error-propagation-with-automatic-differentiation"> </a></h1><p>By Kyle Cranmer, March 2, 2020</p>
 <p>This notebook is dedicated to Feeman Dyson, who died on February 28, 2020 in Princeton, NJ at the age of 96.</p>
 <h3 id="&#8220;New-directions-in-science-are-launched-by-new-tools-much-more-often-than-by-new-concepts.-The-effect-of-a-concept-driven-revolution-is-to-explain-old-things-in-new-ways.-The-effect-of-a-tool-driven-revolution-is-to-discover-new-things-that-have-to-be-explained.&#8221;">&#8220;New directions in science are launched by new tools much more often than by new concepts. The effect of a concept-driven revolution is to explain old things in new ways. The effect of a tool-driven revolution is to discover new things that have to be explained.&#8221;<a class="anchor-link" href="#&#8220;New-directions-in-science-are-launched-by-new-tools-much-more-often-than-by-new-concepts.-The-effect-of-a-concept-driven-revolution-is-to-explain-old-things-in-new-ways.-The-effect-of-a-tool-driven-revolution-is-to-discover-new-things-that-have-to-be-explained.&#8221;"> </a></h3><p>-- Freeman Dyson</p>
 <p><img src="https://www.ias.edu/sites/default/files/styles/grid_feature_teaser/public/Dyson_Freeman_Dyson_20151016_DKomoda-5376%20%281200%29.jpg?itok=oGwqWjL8![image.png](attachment:image.png" alt="">)</p>

@@ -8,4 +8,4 @@ matplotlib
 nbinteract
 scipy
 jupyter-book
-jax
+jaxlib

@@ -30,12 +30,14 @@
   sections:
     - url: /error-propagation/investigating-propagation-of-errors
     #- url: /error-propagation/prop-error-plots
+    - url: /error-propagation/error_propagation_with_jax
     - url: /error-propagation/track-example
 
 - url: /distributions/introduction
   not_numbered: true
   sections:
     - url: /distributions/change-of-variables
+    - url: /distributions/one-over-x-flow
     - url: /distributions/accept-reject
 
 - url: /central-limit-theorem/Central-Limit-Theorem

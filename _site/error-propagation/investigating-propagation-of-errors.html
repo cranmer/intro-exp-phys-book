@@ -26,8 +26,8 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "https://cranmer.github.io/intro-exp-phys-book/error-propagation/investigating-propagation-of-errors.html",
   "headline": "Investigating-propagation-of-errors",
-  "datePublished": "2020-01-25T16:47:48-05:00",
-  "dateModified": "2020-01-25T16:47:48-05:00",
+  "datePublished": "2020-03-02T14:27:25-05:00",
+  "dateModified": "2020-03-02T14:27:25-05:00",
   "description": "        Investigating-propagation-of-errors    Investigating propagation of errors This notebook was made to investigate the propagation of errors formula.We...",
   "author": {
     "@type": "Person",
@@ -724,6 +724,25 @@ initFunction(initPrint)
             
             
 
+            <li class="c-sidebar__section" data-url="/error-propagation/error_propagation_with_jax">
+              <a class="c-sidebar__entry"
+                href="/intro-exp-phys-book/error-propagation/error_propagation_with_jax.html"
+              >
+                
+                Revisiting error propagation with automatic differentiation
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
             <li class="c-sidebar__section" data-url="/error-propagation/track-example">
               <a class="c-sidebar__entry"
                 href="/intro-exp-phys-book/error-propagation/track-example.html"
@@ -788,6 +807,25 @@ initFunction(initPrint)
               >
                 
                 Change-of-variables
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/distributions/one-over-x-flow">
+              <a class="c-sidebar__entry"
+                href="/intro-exp-phys-book/distributions/one-over-x-flow.html"
+              >
+                
+                One-over-x-flow
               </a>
             </li>
             
@@ -1231,25 +1269,29 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline --no-import-all
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#%pylab inline --no-import-all</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
+</div>
+</div>
 
-<div class="jb_output_wrapper }}">
-<div class="output_area">
+<div class="jb_cell">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Populating the interactive namespace from numpy and matplotlib
-</pre>
-</div>
-</div>
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">scs</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 
@@ -1271,6 +1313,16 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 </div>
 </div>
 
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Setup-repeated-observations-of-two-variables-x,-y">Setup repeated observations of two variables x, y<a class="anchor-link" href="#Setup-repeated-observations-of-two-variables-x,-y"> </a></h2>
+</div>
+</div>
 </div>
 </div>
 
@@ -1301,8 +1353,7 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Single-variable-example:-division">Single variable example: division<a class="anchor-link" href="#Single-variable-example:-division"> </a></h2><p>As a warm up, let's consider $q(x) = 1/x$</p>
-
+<h2 id="Check-propagation-of-errors-under-addition">Check propagation of errors under addition<a class="anchor-link" href="#Check-propagation-of-errors-under-addition"> </a></h2>
 </div>
 </div>
 </div>
@@ -1315,15 +1366,22 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="n">gaus_x</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">normpdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">mean_x</span><span class="p">,</span><span class="n">std_x</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_y</span><span class="p">,</span> <span class="n">std_y</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
 
-<span class="n">q_for_plot</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">bins</span>
+<span class="n">q_of_x_y</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">gaus_x</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">q_for_plot</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">pred_mean_q</span> <span class="o">=</span> <span class="n">mean_x</span><span class="o">+</span><span class="n">mean_y</span>
+<span class="n">pred_std_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">std_x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">std_y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">q_of_x_y</span><span class="p">,</span> 
+                                 <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">pred_mean_q</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="n">pred_mean_q</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span> 
+                                 <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">scs</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">pred_mean_q</span><span class="p">,</span> <span class="n">pred_std_q</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;pred&#39;</span><span class="p">,</span><span class="s1">&#39;hist&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;q(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;p(x)&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1339,7 +1397,7 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>Text(0.5,0,&#39;x&#39;)</pre>
+<pre>Text(0, 0.5, &#39;p(x)&#39;)</pre>
 </div>
 
 </div>
@@ -1350,7 +1408,160 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
 
 <div class="output_png output_subarea ">
-<img src="../images/error-propagation/investigating-propagation-of-errors_5_1.png"
+<img src="../images/error-propagation/investigating-propagation-of-errors_7_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="same-thing-with-an-interactive-widget">same thing with an interactive widget<a class="anchor-link" href="#same-thing-with-an-interactive-widget"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_x_plus_y</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">mean_y</span><span class="p">,</span> <span class="n">std_y</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_y</span><span class="p">,</span> <span class="n">std_y</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+    <span class="n">q_of_x_y</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
+
+    <span class="n">pred_mean_q</span> <span class="o">=</span> <span class="n">mean_x</span><span class="o">+</span><span class="n">mean_y</span>
+    <span class="n">pred_std_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">std_x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">std_y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">q_of_x_y</span><span class="p">,</span> 
+                                     <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">pred_mean_q</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="n">pred_mean_q</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span> 
+                                     <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">scs</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">pred_mean_q</span><span class="p">,</span> <span class="n">pred_std_q</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;pred&#39;</span><span class="p">,</span><span class="s1">&#39;hist&#39;</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;q(x)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;p(x)&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># now make the interactive widget</span>
+<span class="n">interact</span><span class="p">(</span><span class="n">plot_x_plus_y</span><span class="p">,</span>
+         <span class="n">mean_x</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">std_x</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span> 
+         <span class="n">mean_y</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">std_y</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span>
+         <span class="n">N</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10000</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+
+ 
+ 
+<div id="23205fb6-1195-4d25-8390-41609aa68746"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#23205fb6-1195-4d25-8390-41609aa68746');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "700be3b4a566432aba48aa19c1f36233", "version_major": 2, "version_minor": 0}
+</script>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;function __main__.plot_x_plus_y(mean_x, std_x, mean_y, std_y, N)&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Single-variable-example:-division">Single variable example: division<a class="anchor-link" href="#Single-variable-example:-division"> </a></h2><p>As a warm up, let's consider $q(x) = 1/x$</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">gaus_x</span> <span class="o">=</span> <span class="n">scs</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">mean_x</span><span class="p">,</span><span class="n">std_x</span><span class="p">)</span>
+
+<span class="n">q_for_plot</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">bins</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">gaus_x</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">q_for_plot</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;q(x)&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Text(0, 0.5, &#39;q(x)&#39;)</pre>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/error-propagation/investigating-propagation-of-errors_11_1.png"
 >
 </div>
 
@@ -1369,14 +1580,16 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q_of_x</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">x</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="n">q_of_x</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">x</span>
 
 <span class="n">pred_mean_q</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">mean_x</span>
 <span class="n">pred_std_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">std_x</span><span class="o">/</span><span class="n">mean_x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">mean_x</span>
 
-<span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">q_of_x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">q_of_x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">mlab</span><span class="o">.</span><span class="n">normpdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">pred_mean_q</span><span class="p">,</span> <span class="n">pred_std_q</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">scs</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">pred_mean_q</span><span class="p">,</span> <span class="n">pred_std_q</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;pred&#39;</span><span class="p">,</span><span class="s1">&#39;hist&#39;</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;p(x)&#39;</span><span class="p">)</span>
@@ -1395,7 +1608,7 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>Text(0,0.5,&#39;p(x)&#39;)</pre>
+<pre>Text(0, 0.5, &#39;p(x)&#39;)</pre>
 </div>
 
 </div>
@@ -1406,7 +1619,7 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
 
 <div class="output_png output_subarea ">
-<img src="../images/error-propagation/investigating-propagation-of-errors_6_1.png"
+<img src="../images/error-propagation/investigating-propagation-of-errors_12_1.png"
 >
 </div>
 
@@ -1445,11 +1658,11 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
     <span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">q_of_x</span><span class="p">,</span> 
                                      <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">pred_mean_q</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="n">pred_mean_q</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span> 
-                                     <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+                                     <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">mlab</span><span class="o">.</span><span class="n">normpdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">pred_mean_q</span><span class="p">,</span> <span class="n">pred_std_q</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">scs</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">pred_mean_q</span><span class="p">,</span> <span class="n">pred_std_q</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;pred&#39;</span><span class="p">,</span><span class="s1">&#39;hist&#39;</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;q(x)&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;p(x)&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -1483,9 +1696,17 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
 
 
-<div class="output_png output_subarea ">
-<img src="../images/error-propagation/investigating-propagation-of-errors_9_0.png"
->
+
+ 
+ 
+<div id="07c787c5-e4ec-4ded-bcbe-8e7b257281b7"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#07c787c5-e4ec-4ded-bcbe-8e7b257281b7');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "09cc77921c8f4f4287866c77cc69629a", "version_major": 2, "version_minor": 0}
+</script>
 </div>
 
 </div>
@@ -1496,7 +1717,7 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;function __main__.plot_1_over_x&gt;</pre>
+<pre>&lt;function __main__.plot_1_over_x(mean_x, std_x, N)&gt;</pre>
 </div>
 
 </div>
@@ -1511,7 +1732,7 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Check-propagation-of-errors-under-addition">Check propagation of errors under addition<a class="anchor-link" href="#Check-propagation-of-errors-under-addition"> </a></h3>
+<h3 id="Check-propagation-of-errors-under-division">Check propagation of errors under division<a class="anchor-link" href="#Check-propagation-of-errors-under-division"> </a></h3>
 </div>
 </div>
 </div>
@@ -1524,86 +1745,7 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_x_plus_y</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">mean_y</span><span class="p">,</span> <span class="n">std_y</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_y</span><span class="p">,</span> <span class="n">std_y</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-
-    <span class="n">q_of_x_y</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
-
-    <span class="n">pred_mean_q</span> <span class="o">=</span> <span class="n">mean_x</span><span class="o">+</span><span class="n">mean_y</span>
-    <span class="n">pred_std_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">std_x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">std_y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-
-    <span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">q_of_x_y</span><span class="p">,</span> 
-                                     <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">pred_mean_q</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="n">pred_mean_q</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span> 
-                                     <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">mlab</span><span class="o">.</span><span class="n">normpdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">pred_mean_q</span><span class="p">,</span> <span class="n">pred_std_q</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;pred&#39;</span><span class="p">,</span><span class="s1">&#39;hist&#39;</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;p(x)&#39;</span><span class="p">)</span>
-
-
-<span class="c1"># now make the interactive widget</span>
-<span class="n">interact</span><span class="p">(</span><span class="n">plot_x_plus_y</span><span class="p">,</span>
-         <span class="n">mean_x</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">std_x</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span> 
-         <span class="n">mean_y</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">std_y</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span>
-         <span class="n">N</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10000</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea ">
-<img src="../images/error-propagation/investigating-propagation-of-errors_11_0.png"
->
-</div>
-
-</div>
-</div>
-<div class="jb_output_wrapper }}">
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;function __main__.plot_x_plus_y&gt;</pre>
-</div>
-
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Check-propagation-of-errors-under-addition">Check propagation of errors under addition<a class="anchor-link" href="#Check-propagation-of-errors-under-addition"> </a></h3>
-</div>
-</div>
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_x_plus_y</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">mean_y</span><span class="p">,</span> <span class="n">std_y</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_x_over_y</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">mean_y</span><span class="p">,</span> <span class="n">std_y</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_y</span><span class="p">,</span> <span class="n">std_y</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
 
@@ -1614,17 +1756,17 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
     <span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">q_of_x_y</span><span class="p">,</span> 
                                      <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">pred_mean_q</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="n">pred_mean_q</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">pred_std_q</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span> 
-                                     <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+                                     <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">mlab</span><span class="o">.</span><span class="n">normpdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">pred_mean_q</span><span class="p">,</span> <span class="n">pred_std_q</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">scs</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">pred_mean_q</span><span class="p">,</span> <span class="n">pred_std_q</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;pred&#39;</span><span class="p">,</span><span class="s1">&#39;hist&#39;</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;q(x)&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;p(x)&#39;</span><span class="p">)</span>
 
 
 
-<span class="n">interact</span><span class="p">(</span><span class="n">plot_x_plus_y</span><span class="p">,</span><span class="n">mean_x</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">std_x</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">mean_y</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">std_y</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span><span class="n">N</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100000</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+<span class="n">interact</span><span class="p">(</span><span class="n">plot_x_over_y</span><span class="p">,</span><span class="n">mean_x</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">std_x</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">mean_y</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">std_y</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span><span class="n">N</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100000</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -1639,9 +1781,17 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
 
 
-<div class="output_png output_subarea ">
-<img src="../images/error-propagation/investigating-propagation-of-errors_13_0.png"
->
+
+ 
+ 
+<div id="15c08706-a863-4737-b9b7-b58eaa6b7197"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#15c08706-a863-4737-b9b7-b58eaa6b7197');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "b158140c73a74d55947cdef181af2f8c", "version_major": 2, "version_minor": 0}
+</script>
 </div>
 
 </div>
@@ -1652,7 +1802,7 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;function __main__.plot_x_plus_y&gt;</pre>
+<pre>&lt;function __main__.plot_x_over_y(mean_x, std_x, mean_y, std_y, N)&gt;</pre>
 </div>
 
 </div>
@@ -1685,8 +1835,8 @@ uncertainty on $x$ and $y$ (denoted $\sigma_x$ and $\sigma_y$, respectively) thr
     
 
     
-    <a id="js-page__nav__next" class="c-page__nav__next" href="/intro-exp-phys-book/error-propagation/track-example.html">
-      Track-example <span class="u-margin-right-tiny"></span> 〉
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/intro-exp-phys-book/error-propagation/error_propagation_with_jax.html">
+      Revisiting error propagation with ... <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>

@@ -52,6 +52,8 @@
       title: An example with with autodiff
     - url: /distributions/accept-reject
       title: Accept / Reject Monte Carlo
+    - url: /distributions/Binomial_histograms-interactive
+      title: Interactive Exploration of Statistical Fluctuations in Histograms 
 
 - url: /central-limit-theorem/Central-Limit-Theorem
   not_numbered: true

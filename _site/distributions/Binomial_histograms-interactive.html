@@ -5,16 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
-  <title>Notes about this book</title>
-  <meta name="description" content="        Notes about this book    I started with the demo jupyter-book and started to delete pages I didn't want.I creaetd a new project repository and set Gi...">
+  <title>Interactive Exploration of Statistical Fluctuations in Histograms</title>
+  <meta name="description" content="        Interactive Exploration of Statistical Fluctuations in Histograms    An interactive exploration of statistical fluctuations in histograms By Kyle Cra...">
 
-  <link rel="canonical" href="https://cranmer.github.io/intro-exp-phys-book/notes-about-site.html">
+  <link rel="canonical" href="https://cranmer.github.io/intro-exp-phys-book/distributions/Binomial_histograms-interactive.html">
   <link rel="alternate" type="application/rss+xml" title="Introduction to statistics for experimental physics" href="https://cranmer.github.io/intro-exp-phys-book/feed.xml">
 
-  <meta property="og:url"         content="https://cranmer.github.io/intro-exp-phys-book/notes-about-site.html" />
+  <meta property="og:url"         content="https://cranmer.github.io/intro-exp-phys-book/distributions/Binomial_histograms-interactive.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Notes about this book" />
-<meta property="og:description" content="        Notes about this book    I started with the demo jupyter-book and started to delete pages I didn't want.I creaetd a new project repository and set Gi..." />
+<meta property="og:title"       content="Interactive Exploration of Statistical Fluctuations in Histograms" />
+<meta property="og:description" content="        Interactive Exploration of Statistical Fluctuations in Histograms    An interactive exploration of statistical fluctuations in histograms By Kyle Cra..." />
 <meta property="og:image"       content="https://cranmer.github.io/intro-exp-phys-book/images/logo/logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -24,11 +24,11 @@
   {
   "@context": "http://schema.org",
   "@type": "NewsArticle",
-  "mainEntityOfPage": "https://cranmer.github.io/intro-exp-phys-book/notes-about-site.html",
-  "headline": "Notes about this book",
+  "mainEntityOfPage": "https://cranmer.github.io/intro-exp-phys-book/distributions/Binomial_histograms-interactive.html",
+  "headline": "Interactive Exploration of Statistical Fluctuations in Histograms",
   "datePublished": "2020-04-13T13:17:38-05:00",
   "dateModified": "2020-04-13T13:17:38-05:00",
-  "description": "        Notes about this book    I started with the demo jupyter-book and started to delete pages I didn't want.I creaetd a new project repository and set Gi...",
+  "description": "        Interactive Exploration of Statistical Fluctuations in Histograms    An interactive exploration of statistical fluctuations in histograms By Kyle Cra...",
   "author": {
     "@type": "Person",
     "name": "Kyle Cranmer"
@@ -551,7 +551,7 @@ initFunction(initPrint)
     },
     kernelOptions: {
     kernelName: "python3",
-    path: ""
+    path: "content/distributions"
     }
 }
 </script>
@@ -1217,10 +1217,27 @@ initFunction(initPrint)
 <div class="download-buttons-dropdown">
     <button id="dropdown-button-trigger" class="interact-button"><img src="/intro-exp-phys-book/assets/images/download-solid.svg" alt="Download" /></button>
     <div class="download-buttons">
+        <a href="/intro-exp-phys-book/content/distributions/Binomial_histograms-interactive.ipynb" download>
+        <button id="interact-button-download" class="interact-button">.ipynb</button>
+        </a>
         
         <a id="interact-button-print"><button id="interact-button-download" class="interact-button">.pdf</button></a>
     </div>
 </div>
+
+
+  <button id="interact-button-thebelab" class="interact-button">Thebelab</button>
+
+  
+  
+
+
+
+
+
+
+<a href="https://mybinder.org/v2/gh/cranmer/intro-exp-phys-book/master?filepath=content%2Fdistributions%2FBinomial_histograms-interactive.ipynb"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="/intro-exp-phys-book/assets/images/logo_binder.svg" alt="Interact" />Interact</button></a>
+  
 
 
 </div>
@@ -1240,25 +1257,239 @@ initFunction(initPrint)
       <main class="c-textbook__page" tabindex="-1">
             <div class="c-textbook__content" id="textbook_content">
                   <main class="jupyter-page">
-    <div id="page-info"><div id="page-title">Notes about this book</div>
+    <div id="page-info"><div id="page-title">Interactive Exploration of Statistical Fluctuations in Histograms</div>
 </div>
     
 <div class="jb_cell">
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I started with the demo jupyter-book and started to delete pages I didn't want.</p>
-<p>I creaetd a new project repository and set GitHub pages to look for the source in the <code>master</code> branch. 
-This means that the url is <code>cranmer.github.io/intro-exp-phys-book</code>. 
-That didn't work at first, that URL was redirected to the <code>introduction.html</code> landing page automatically.
-Later I realized I needed to modify the <code>_config.yml</code> file to be:</p>
-
-<pre><code>baseurl: "/intro-exp-phys-book" # the subpath of your site, e.g. /blog. If there is no subpath for your site, use an empty string ""
-url: "https://cranmer.github.io" # the base hostname &amp; protocol for your site, e.g. http://example.com</code></pre>
-<p>Now it's working.</p>
+<h2 id="An-interactive-exploration-of-statistical-fluctuations-in-histograms">An interactive exploration of statistical fluctuations in histograms<a class="anchor-link" href="#An-interactive-exploration-of-statistical-fluctuations-in-histograms"> </a></h2><p>By Kyle Cranmer, April 13, 2020</p>
 
 </div>
 </div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">binom</span><span class="p">,</span> <span class="n">norm</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">make_plots</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">N_bins</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">mu_g</span><span class="p">,</span> <span class="n">sigma_g</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu_g</span><span class="p">,</span> <span class="n">sigma_g</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+
+    <span class="n">mybins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">N_bins</span><span class="p">)</span>
+    <span class="n">bin_to_study</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">N_bins</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">mybins</span><span class="p">[</span><span class="n">bin_to_study</span><span class="p">],</span> <span class="n">mybins</span><span class="p">[</span><span class="n">bin_to_study</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">bin_width</span> <span class="o">=</span> <span class="p">(</span><span class="n">mybins</span><span class="p">[</span><span class="n">bin_to_study</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">mybins</span><span class="p">[</span><span class="n">bin_to_study</span><span class="p">])</span>
+    <span class="n">middle_of_bin</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">mybins</span><span class="p">[</span><span class="n">bin_to_study</span><span class="p">]</span><span class="o">+</span> <span class="n">mybins</span><span class="p">[</span><span class="n">bin_to_study</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># probability to land in the specific bin</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">mybins</span><span class="p">[</span><span class="n">bin_to_study</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">mu_g</span><span class="p">,</span> <span class="n">sigma_g</span><span class="p">)</span> \
+        <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">mybins</span><span class="p">[</span><span class="n">bin_to_study</span><span class="p">],</span> <span class="n">mu_g</span><span class="p">,</span> <span class="n">sigma_g</span><span class="p">)</span>
+
+    <span class="c1"># Raw Histogram</span>
+    <span class="c1">#fig, ax = plt.subplot(3,1,1)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="n">mybins</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;histogram&#39;</span><span class="p">)</span>
+    <span class="n">patches</span><span class="p">[</span><span class="n">bin_to_study</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    <span class="n">patches</span><span class="p">[</span><span class="n">bin_to_study</span><span class="p">]</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;bin to study&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="p">[</span><span class="n">patches</span><span class="p">[</span><span class="n">bin_to_study</span><span class="p">]])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">middle_of_bin</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="n">p</span><span class="o">*</span><span class="n">N</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;expected count&#39;</span><span class="p">)</span>
+    <span class="c1">#ax.vlines(middle_of_bin,0.,counts[bin_to_study], lw=2,color=&#39;r&#39;,label=&#39;k observed&#39;)</span>
+    <span class="c1">#ax.hlines(counts[bin_to_study],-3.5,middle_of_bin, lw=2,color=&#39;r&#39;,label=&#39;k observed&#39;)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mybins</span><span class="p">,</span><span class="n">N</span><span class="o">*</span><span class="n">bin_width</span><span class="o">*</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">mybins</span><span class="p">,</span><span class="n">mu_g</span><span class="p">,</span><span class="n">sigma_g</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True Gaussian&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;counts per bin&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Raw histogram&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="n">rv</span> <span class="o">=</span> <span class="n">binom</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+
+    <span class="n">k_for_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">binom</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span>  <span class="n">binom</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+
+    <span class="c1">#ax = plt.subplot(3,1,2)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">k_for_plot</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">rv</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k_for_plot</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">k_for_plot</span><span class="p">,</span><span class="n">rv</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k_for_plot</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;B(k|N,p)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="o">*</span><span class="n">rv</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">rv</span><span class="o">.</span><span class="n">mean</span><span class="p">())),</span> <span class="n">rv</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">-.</span><span class="mi">5</span><span class="o">*</span><span class="n">rv</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">rv</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">+.</span><span class="mi">5</span><span class="o">*</span><span class="n">rv</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;std[k]&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">rv</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">0</span><span class="p">,</span><span class="n">rv</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">rv</span><span class="o">.</span><span class="n">mean</span><span class="p">())),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;mean(k)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="n">bin_to_study</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="n">rv</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="n">bin_to_study</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;observed k&#39;</span><span class="p">)</span>
+    <span class="c1">#ax.ylim(0, 1.2*np.max(rv.pmf(k_for_plot)))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;k, the number of counts in bin of study&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;p(k)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">rv</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k_for_plot</span><span class="p">))])</span>    
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;zooming in on relavant part of k&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="c1">#ax = plt.subplot(3,1,3)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">k_for_plot</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">rv</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k_for_plot</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">k_for_plot</span><span class="p">,</span><span class="n">rv</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k_for_plot</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;B(k|N,p)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="o">*</span><span class="n">rv</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">rv</span><span class="o">.</span><span class="n">mean</span><span class="p">())),</span> <span class="n">rv</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">-.</span><span class="mi">5</span><span class="o">*</span><span class="n">rv</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">rv</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">+.</span><span class="mi">5</span><span class="o">*</span><span class="n">rv</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;std[k]&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">rv</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">0</span><span class="p">,</span><span class="n">rv</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">rv</span><span class="o">.</span><span class="n">mean</span><span class="p">())),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;mean(k)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="n">bin_to_study</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="n">rv</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="n">bin_to_study</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;observed k&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;k, the number of counts in bin of study&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;p(k)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">rv</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k_for_plot</span><span class="p">))])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;The full range of k from [0,N]&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">make_plots</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../images/distributions/Binomial_histograms-interactive_4_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="k">import</span> <span class="n">widgets</span>  
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="k">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">fixed</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">interact</span><span class="p">(</span><span class="n">make_plots</span><span class="p">,</span><span class="n">N</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">N_bins</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+
+ 
+ 
+<div id="511b0e67-4f86-48d7-ac9a-695d75e3c43c"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#511b0e67-4f86-48d7-ac9a-695d75e3c43c');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "b38c272bcad74efc92f854de9eb38fda", "version_major": 2, "version_minor": 0}
+</script>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;function __main__.make_plots(N=100, N_bins=20)&gt;</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -1275,8 +1506,8 @@ url: "https://cranmer.github.io" # the base hostname &amp; protocol for your sit
     
     
 
-    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/intro-exp-phys-book/python/Types.html">
-      〈 <span class="u-margin-right-tiny"></span> Types
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/intro-exp-phys-book/distributions/accept-reject.html">
+      〈 <span class="u-margin-right-tiny"></span> Accept / Reject Monte Carlo
     </a>
   
 
@@ -1284,8 +1515,8 @@ url: "https://cranmer.github.io" # the base hostname &amp; protocol for your sit
     
 
     
-    <a id="js-page__nav__next" class="c-page__nav__next" href="/intro-exp-phys-book/test_pages/test.html">
-      Test pages <span class="u-margin-right-tiny"></span> 〉
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/intro-exp-phys-book/central-limit-theorem/Central-Limit-Theorem.html">
+      Central-limit-theorem <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>
